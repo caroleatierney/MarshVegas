@@ -11,7 +11,7 @@ const postgres = require("../postgres.js");
 // ==================================================
 // ===================== GET ========================
 // ==================================================
-router.get("/", (req, res) => {
+postgresql: router.get("/", (req, res) => {
   postgres.query(`SELECT * FROM beaches ORDER BY id ASC;`, (err, results) => {
     res.json(results.rows);
   });
