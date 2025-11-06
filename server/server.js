@@ -6,13 +6,13 @@
 
 const express = require("express");
 const router = express.Router();
-const postgres = require("/server/postgres.js");
+const postgres = require("/postgres.js");
 
 // ==================================================
 // ===================== GET ========================
 // ==================================================
 postgresql: router.get("/", (req, res) => {
-  postgres.query(`SELECT * FROM beaches ORDER BY id ASC;`, (err, results) => {
+  postgres.query(`SELECT * FROM MarshVegasBeaches ORDER BY id ASC;`, (err, results) => {
     res.json(results.rows);
   });
 });
@@ -24,7 +24,7 @@ router.post("/", (req, res) => {
   // console.log("create-id", req.body)
 
   postgres.query(
-    `INSERT INTO beaches (name, photo, photo_credit, access, parking, hours, avail_rec, notes)
+    `INSERT INTO MarshVegasBeaches (name, photo, photo_credit, access, parking, hours, avail_rec, notes)
     VALUES
     (
     '${req.body.name}',
@@ -43,7 +43,7 @@ router.post("/", (req, res) => {
         console.log(err);
       } else {
         postgres.query(
-          `SELECT * FROM beaches ORDER BY id ASC;`,
+          `SELECT * FROM MarshVegasBeaches ORDER BY id ASC;`,
           (err, results) => {
             res.json(results.rows);
           }
@@ -60,10 +60,10 @@ router.delete("/:id", (req, res) => {
   // console.log("delete-id", req.params.id)
 
   postgres.query(
-    `DELETE FROM beaches WHERE id = ${req.params.id};`,
+    `DELETE FROM MarshVegasBeaches WHERE id = ${req.params.id};`,
     (err, results) => {
       postgres.query(
-        `SELECT * FROM beaches ORDER BY id ASC;`,
+        `SELECT * FROM MarshVegasBeaches ORDER BY id ASC;`,
         (err, results) => {
           res.json(results.rows);
         }
@@ -80,7 +80,7 @@ router.put("/:id", (req, res) => {
 
   postgres.query(
     `
-    UPDATE beaches
+    UPDATE MarshVegasBeaches
 
     SET
     name='${req.body.name}',
@@ -95,7 +95,7 @@ router.put("/:id", (req, res) => {
     WHERE id = ${req.params.id};`,
     (err, results) => {
       postgres.query(
-        "SELECT * FROM beaches ORDER BY id ASC;",
+        "SELECT * FROM MarshVegasBeaches ORDER BY id ASC;",
         (err, results) => {
           res.json(results.rows);
         }
