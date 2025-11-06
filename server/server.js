@@ -6,7 +6,7 @@
 
 const express = require("express");
 const router = express.Router();
-const postgres = require("../postgres.js");
+const postgres = require("/server/postgres.js");
 
 // ==================================================
 // ===================== GET ========================
