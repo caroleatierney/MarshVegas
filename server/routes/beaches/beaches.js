@@ -1,14 +1,16 @@
 const pool = require("../db"); // <- new database pool file
+const router = express.Router();
+const postgres = require("../postgres.js");
 
-const Beaches = {
+const marshVegasBeaches = {
   async all() {
-    const result = await pool.query(`SELECT * FROM beaches ORDER BY id ASC`);
+    const result = await pool.query(`SELECT * FROM marshVegasBeaches ORDER BY id ASC`);
     return result.rows;
   },
 
   async create(beach) {
     const result = await pool.query(
-      `INSERT INTO beaches (name, photo, photo_credit, access, parking, hours, avail_rec, notes)
+      `INSERT INTO marshVegasBeaches (name, photo, photo_credit, access, parking, hours, avail_rec, notes)
        VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
        RETURNING *`,
       [
@@ -27,7 +29,7 @@ const Beaches = {
 
   async update(beach) {
     const result = await pool.query(
-      `UPDATE beaches SET name=$1, photo=$2, photo_credit=$3, access=$4, parking=$5, hours=$6, avail_rec=$7, notes=$8
+      `UPDATE marshVegasBeaches SET name=$1, photo=$2, photo_credit=$3, access=$4, parking=$5, hours=$6, avail_rec=$7, notes=$8
        WHERE id=$9 RETURNING *`,
       [
         beach.name,
@@ -45,8 +47,8 @@ const Beaches = {
   },
 
   async delete(id) {
-    await pool.query(`DELETE FROM beaches WHERE id = $1`, [id]);
+    await pool.query(`DELETE FROM marshVegasBeaches WHERE id = $1`, [id]);
   },
 };
 
-module.exports = Beaches;
+module.exports = marshVegasBeaches;

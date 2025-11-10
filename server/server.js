@@ -1,12 +1,17 @@
 require("dotenv").config();
-
 const express = require("express");
 const app = express();
+
 app.use(express.json());
 
-const beachesController = require("./routes/beaches");
-app.use("/beaches", beachesController);
+// ==================================================
+// ===================== ROUTES =====================
+// ==================================================
+const marshVegasBeachesController = require("./routes/marshVegasBeaches");
+app.use("/marshVegasBeaches", marshVegasBeachesController);
 
-app.listen(process.env.PORT || 3001, () => {
-  console.log("Server running 🎉");
-});
+// ==================================================
+// ==================== LISTENER ====================
+// ==================================================
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
