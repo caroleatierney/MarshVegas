@@ -1,10 +1,11 @@
-const pool = require("../db"); // <- new database pool file
 const router = express.Router();
 const postgres = require("../postgres.js");
 
 const marshVegasBeaches = {
   async all() {
-    const result = await pool.query(`SELECT * FROM marshVegasBeaches ORDER BY id ASC`);
+    const result = await pool.query(
+      `SELECT * FROM marshVegasBeaches ORDER BY id ASC`
+    );
     return result.rows;
   },
 
