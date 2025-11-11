@@ -1,55 +1,50 @@
+const express = require("express");
 const router = express.Router();
-const postgres = require("../postgres.js");
+const Beaches = require("../models/marshVegasBeaches");
 
-const marshVegasBeaches = {
-  async all() {
-    const result = await pool.query(
-      `SELECT * FROM marshVegasBeaches ORDER BY id ASC`
-    );
-    return result.rows;
-  },
+// GET all beaches
+router.get("/", async (req, res) => {
+  try {
+    const beaches = await Beaches.all();
+    res.json(beaches);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Database error" });
+  }
+});
 
-  async create(beach) {
-    const result = await pool.query(
-      `INSERT INTO marshVegasBeaches (name, photo, photo_credit, access, parking, hours, avail_rec, notes)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
-       RETURNING *`,
-      [
-        beach.name,
-        beach.photo,
-        beach.photo_credit,
-        beach.access,
-        beach.parking,
-        beach.hours,
-        beach.avail_rec,
-        beach.notes,
-      ]
-    );
-    return result.rows[0];
-  },
+// CREATE a beach
+router.post("/", async (req, res) => {
+  try {
+    const beach = await Beaches.create(req.body);
+    res.json(beach);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Database error" });
+  }
+});
 
-  async update(beach) {
-    const result = await pool.query(
-      `UPDATE marshVegasBeaches SET name=$1, photo=$2, photo_credit=$3, access=$4, parking=$5, hours=$6, avail_rec=$7, notes=$8
-       WHERE id=$9 RETURNING *`,
-      [
-        beach.name,
-        beach.photo,
-        beach.photo_credit,
-        beach.access,
-        beach.parking,
-        beach.hours,
-        beach.avail_rec,
-        beach.notes,
-        beach.id,
-      ]
-    );
-    return result.rows[0];
-  },
+// UPDATE a beach
+router.put("/:id", async (req, res) => {
+  try {
+    req.body.id = req.params.id;
+    const beach = await Beaches.update(req.body);
+    res.json(beach);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Database error" });
+  }
+});
 
-  async delete(id) {
-    await pool.query(`DELETE FROM marshVegasBeaches WHERE id = $1`, [id]);
-  },
-};
+// DELETE a beach
+router.delete("/:id", async (req, res) => {
+  try {
+    await Beaches.delete(req.params.id);
+    res.json({ message: "Deleted" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Database error" });
+  }
+});
 
-module.exports = marshVegasBeaches;
+module.exports = router;
