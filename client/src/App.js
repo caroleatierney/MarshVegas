@@ -1,23 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
-
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ padding: "2rem", fontFamily: "Arial" }}>
+      <h1>🌊 MarshVegas Beaches</h1>
+      <p>Welcome! This is the landing page for the MarshVegas Beaches App.</p>
+
+      <a href="/beaches" style={{ color: "blue" }}>
+        View All Beaches (Backend JSON)
+      </a>
     </div>
   );
 }
