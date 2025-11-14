@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const postgres = require("../postgres.js");
 const Beaches = require("../models/marshVegasBeaches");
 
 // GET all beaches
