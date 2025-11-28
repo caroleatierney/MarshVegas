@@ -1,10 +1,28 @@
 const express = require("express");
 const router = express.Router();
+const postgres = require("../postgres"); // or your model
 
-// Routes
-const beachesController = require("./routes/beaches");
-app.use("/beaches", beachesController);
+const beaches = [
+  { id: 1, name: "Rexhame Beach", town: "Marshfield" },
+  { id: 2, name: "Brant Rock Beach", town: "Marshfield" },
+  { id: 3, name: "Green Harbor Beach", town: "Marshfield" },
+];
 
-// Listener
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// GET all beaches
+router.get("/", async (req, res) => {
+  try {
+    const result = await postgres.query("SELECT * FROM beaches");
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET one beach
+router.get("/:id", (req, res) => {
+  const beach = beaches.find((b) => b.id == req.params.id);
+  if (!beach) return res.status(404).json({ error: "Not found" });
+  res.json(beach);
+});
+
+module.exports = router;

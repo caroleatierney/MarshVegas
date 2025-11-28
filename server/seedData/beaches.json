@@ -1,0 +1,110 @@
+[
+  {
+    "name": "Rexhame Beach",
+    "photo": "https://i.imgur.com/oiKe0rJ.jpg",
+    "photo_credit": "South Shore Trails",
+    "access": "Public",
+    "parking": "Weekday: $15, Weekend: $20, Holidays: $20, Residents Annual Fee: $45, (Annual Fee is $40 before April 30)",
+    "hours": "Monday: 6am - 10pm, Tuesday: 6am - 10pm, Wednesday: 6am - 10pm, Thursday: 6am - 10pm,  Friday: 6am - 10pm, Saturday: 6am - 10pm, Sunday: 6am - 10pm",
+    "avail_rec": [
+      "https://i.imgur.com/FAOW8rW.png",
+      "https://i.imgur.com/boTxmLr.png",
+      "https://i.imgur.com/EJwnOgi.png",
+      "https://i.imgur.com/Sovm9sB.png",
+      "https://i.imgur.com/gSIFxt4.png",
+      "https://i.imgur.com/huyrFri.png",
+      "https://i.imgur.com/bPvVrcT.png",
+      "https://i.imgur.com/JlPzFny.png",
+      "https://i.imgur.com/UDEze2Z.png",
+      "https://i.imgur.com/Af9dWrz.png"
+    ],
+    "notes": "Rexhame is my favorite beach. It is six miles long and has lots of things to do. There are walking trails, fishing, kayaking, swimming, and lots of wildlife. Family friendly with restrooms and amenities.",
+    "latitude": 42.124,
+    "longitude": -70.677
+  },
+  {
+    "name": "Sunrise Beach",
+    "photo": "https://i.imgur.com/J7I7QGt.jpg",
+    "photo_credit": "Bedroomvillas.org",
+    "access": "Public",
+    "parking": "No public parking and beach access is free.",
+    "hours": "Monday: 6am - 10pm, Tuesday: 6am - 10pm, Wednesday: 6am - 10pm, Thursday: 6am - 10pm, Friday: 6am - 10pm, Saturday: 6am - 10pm, Sunday: 6am - 10pm",
+    "avail_rec": [
+      "https://i.imgur.com/FAOW8rW.png",
+      "https://i.imgur.com/gSIFxt4.png",
+      "https://i.imgur.com/huyrFri.png",
+      "https://i.imgur.com/EJwnOgi.png"
+    ],
+    "notes": "Known for beautiful sunrises. Limited beach space at high tide. Lifeguards on duty Friday through Monday.",
+    "latitude": 42.105,
+    "longitude": -70.66
+  },
+  {
+    "name": "Burkes Beach",
+    "photo": "https://i.imgur.com/P9mTqEB.jpg",
+    "photo_credit": "rightcitydata.com",
+    "access": "Public",
+    "parking": "Weekday: $15, Weekend: $20, Holidays: $20, Residents Annual Fee: $45, (Annual Fee is $40 before April 30)",
+    "hours": "Monday: 6am - 10pm, Tuesday: 6am - 10pm, Wednesday: 6am - 10pm, Thursday: 6am - 10pm, Friday: 6am - 10pm, Saturday: 6am - 10pm, Sunday: 6am - 10pm",
+    "avail_rec": [
+      "https://i.imgur.com/FAOW8rW.png",
+      "https://i.imgur.com/EJwnOgi.png",
+      "https://i.imgur.com/gSIFxt4.png",
+      "https://i.imgur.com/huyrFri.png"
+    ],
+    "notes": "Great for families with young kids. Warm bay water, jetty exploration, tide pools with crabs and lobsters. Near General Store and Green Harbor Lobster Pound. Popular bridge jumping spot.",
+    "latitude": 42.077,
+    "longitude": -70.646
+  },
+  {
+    "name": "Fieldston Beach",
+    "photo": "https://i.imgur.com/Jp5viWD.jpg",
+    "photo_credit": "North and South Rivers Watershed Association",
+    "access": "Public",
+    "parking": "Limited resident parking on Old Beach Road. Located at the end of Hartford Road.",
+    "hours": "Monday: 6am - 10pm, Tuesday: 6am - 10pm, Wednesday: 6am - 10pm, Thursday: 6am - 10pm, Friday: 6am - 10pm, Saturday: 6am - 10pm, Sunday: 6am - 10pm",
+    "avail_rec": [
+      "https://i.imgur.com/FAOW8rW.png",
+      "https://i.imgur.com/Af9dWrz.png",
+      "https://i.imgur.com/gSIFxt4.png",
+      "https://i.imgur.com/huyrFri.png"
+    ],
+    "notes": "Adjacent to Sunrise Beach and shares its beautiful sunrises. Small at high tide. Mostly used by local residents and vacationers.",
+    "latitude": 42.108,
+    "longitude": -70.663
+  },
+  {
+    "name": "Brant Rock Beach",
+    "photo": "https://i.imgur.com/bXIvGgd.jpg",
+    "photo_credit": "FidoLoves.org",
+    "access": "Public",
+    "parking": "Resident sticker parking in specific town lots.",
+    "hours": "Monday: 6am - 10pm, Tuesday: 6am - 10pm, Wednesday: 6am - 10pm, Thursday: 6am - 10pm, Friday: 6am - 10pm, Saturday: 6am - 10pm, Sunday: 6am - 10pm",
+    "avail_rec": [
+      "https://i.imgur.com/FAOW8rW.png",
+      "https://i.imgur.com/gSIFxt4.png",
+      "https://i.imgur.com/huyrFri.png",
+      "https://i.imgur.com/EJwnOgi.png"
+    ],
+    "notes": "Dog friendly, scenic rock formations at low tide, sea wall walking, nearby shops/restaurants/bars, restrooms, beloved jetty.",
+    "latitude": 42.09,
+    "longitude": -70.641
+  },
+  {
+    "name": "Ocean Bluff Beach",
+    "photo": "https://i.imgur.com/FOKvHiZ.jpg",
+    "photo_credit": "Vrbo.org",
+    "access": "Public",
+    "parking": "No public parking and beach access is free.",
+    "hours": "Monday: 6am - 10pm, Tuesday: 6am - 10pm, Wednesday: 6am - 10pm, Thursday: 6am - 10pm, Friday: 6am - 10pm, Saturday: 6am - 10pm, Sunday: 6am - 10pm",
+    "avail_rec": [
+      "https://i.imgur.com/FAOW8rW.png",
+      "https://i.imgur.com/gSIFxt4.png",
+      "https://i.imgur.com/huyrFri.png",
+      "https://i.imgur.com/EJwnOgi.png"
+    ],
+    "notes": "Never been!!! On my bucket list.",
+    "latitude": 42.099,
+    "longitude": -70.652
+  }
+]
