@@ -6,8 +6,8 @@ app.use(express.json());
 // ==================================================
 // ===================== ROUTES =====================
 // ==================================================
-const marshVegasBeachesController = require("./routes/marshVegasBeaches");
-app.use("/marshVegasBeaches", marshVegasBeachesController);
+const beachesController = require("./routes/beaches");
+app.use("/beaches", beachesController);
 
 // ==================================================
 // ==================== LISTENER ====================
@@ -15,7 +15,7 @@ app.use("/marshVegasBeaches", marshVegasBeachesController);
 const PORT = process.env.PORT || 3001;
 
 app.get("/", (req, res) => {
-  res.send("API is running. Try /marshVegasBeaches");
+  res.send("API is running. Try /beaches");
 });
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
