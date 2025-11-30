@@ -2,12 +2,6 @@ const express = require("express");
 const router = express.Router();
 const postgres = require("../postgres"); // or your model
 
-const beaches = [
-  { id: 1, name: "Rexhame Beach", town: "Marshfield" },
-  { id: 2, name: "Brant Rock Beach", town: "Marshfield" },
-  { id: 3, name: "Green Harbor Beach", town: "Marshfield" },
-];
-
 // GET all beaches
 router.get("/", async (req, res) => {
   try {

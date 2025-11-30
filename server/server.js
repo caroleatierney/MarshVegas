@@ -9,6 +9,15 @@ app.use(express.json());
 const beachesController = require("./routes/beaches");
 app.use("/beaches", beachesController);
 
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://marshvegasclient.onrender.com",
+    ],
+  })
+);
+
 // ==================================================
 // ==================== LISTENER ====================
 // ==================================================

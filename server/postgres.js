@@ -1,14 +1,18 @@
+require("dotenv").config();
 const { Client } = require("pg");
 
+if (!process.env.DATABASE_URL) {
+  throw new Error("❌ DATABASE_URL is missing from .env");
+}
+
 const client = new Client({
-  connectionString:
-    process.env.DATABASE_URL || "postgresql://localhost:5432/marbeachrec",
-  ssl:
-    process.env.NODE_ENV === "production"
-      ? { rejectUnauthorized: false }
-      : false,
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false },
 });
 
-client.connect();
+client
+  .connect()
+  .then(() => console.log("✅ Connected to Neon PostgreSQL"))
+  .catch((err) => console.error("❌ Connection error:", err));
 
 module.exports = client;

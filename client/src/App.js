@@ -1,14 +1,27 @@
-function App() {
-  return (
-    <div style={{ padding: "2rem", fontFamily: "Arial" }}>
-      <h1>🌊 MarshVegas Beaches</h1>
-      <p>Welcome! This is the landing page for the MarshVegas Beaches App.</p>
+import { API_BASE_URL } from "./api";
 
-      <a href="/beaches" style={{ color: "blue" }}>
-        View All Beaches (Backend JSON)
-      </a>
-    </div>
-  );
+export async function fetchBeaches() {
+  const res = await fetch(`${API_BASE_URL}/beaches`);
+  if (!res.ok) throw new Error("Failed to fetch beaches");
+  return res.json();
 }
 
-export default App;
+// Fetch a single beach
+
+export async function fetchBeach(id) {
+  const res = await fetch(`${API_BASE_URL}/beaches/${id}`);
+  if (!res.ok) throw new Error("Beach not found");
+  return res.json();
+}
+
+// Create a beach
+export async function createBeach(data) {
+  const res = await fetch(`${API_BASE_URL}/beaches`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+
+  if (!res.ok) throw new Error("Failed to create beach");
+  return res.json();
+}
