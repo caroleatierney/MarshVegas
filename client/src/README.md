@@ -10,6 +10,8 @@ In the project's client directory, you can run:
 
 ### `npm start`
 
+When you promote, NPM RUN BUILD in client folder
+
 Runs the app in the development mode.\
 Open http://localhost:3001 to view it in your browser.
 
