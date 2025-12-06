@@ -1,27 +1,29 @@
-import { API_BASE_URL } from "./api";
+import React from "react";
+import { fetchBeaches, createBeach, fetchBeach } from "./api";
 
-export async function fetchBeaches() {
-  const res = await fetch(`${API_BASE_URL}/beaches`);
-  if (!res.ok) throw new Error("Failed to fetch beaches");
-  return res.json();
+class App extends React.Component {
+  state = {
+    beaches: [],
+  };
+
+  componentDidMount() {
+    fetchBeaches().then((data) => {
+      this.setState({ beaches: data });
+    });
+  }
+
+  render() {
+    return (
+      <div style={{ padding: "2rem" }}>
+        <h1>🌊 MarshVegas Beaches</h1>
+        <ul>
+          {this.state.beaches.map((b) => (
+            <li key={b.id}>{b.name}</li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
 }
 
-// Fetch a single beach
-
-export async function fetchBeach(id) {
-  const res = await fetch(`${API_BASE_URL}/beaches/${id}`);
-  if (!res.ok) throw new Error("Beach not found");
-  return res.json();
-}
-
-// Create a beach
-export async function createBeach(data) {
-  const res = await fetch(`${API_BASE_URL}/beaches`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-  });
-
-  if (!res.ok) throw new Error("Failed to create beach");
-  return res.json();
-}
+export default App;
