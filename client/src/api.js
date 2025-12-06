@@ -18,18 +18,37 @@ export async function apiFetch(path, options = {}) {
 
 // ---------- Specific API calls ----------
 
+// FETCH ALL
 export function fetchBeaches() {
   return apiFetch("/beaches");
 }
 
+// FETCH ONE
 export function fetchBeach(id) {
   return apiFetch(`/beaches/${id}`);
 }
 
+// CREATE A BEACH
 export function createBeach(data) {
   return apiFetch("/beaches", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
+}
+
+// UPDATE A BEACH
+export function updateBeach(id) {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  return apiFetch(`/beaches/${id}`);
+}
+
+// DELETE A BEACH
+export function deleteBeach(id) {
+  return apiFetch(`/beaches/${id}`, {
+    method:'DELETE',
+  });
+
 }
