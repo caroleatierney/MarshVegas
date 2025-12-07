@@ -30,3 +30,14 @@ Node/Express is listening on 3001
 So React calls: http://localhost:3001/beaches and cors() must allow localhost:3000.
 
 Will probably try to stay with Bulma for the Front End css Framework.
+
+Render free services will sleep after 15 minutes on your local machine
+❗BUT… Render web services sleep
+
+On free tier, Render services go to sleep after 15 minutes of inactivity, then take ~60 seconds to wake up.
+So the first visit might feel slow — that's normal.
+
+Your setup is:
+Frontend: marshvegasclient.onrender.com
+Backend: marshvegas.onrender.com
+Database: Neon PostgreSQL (hosted)
