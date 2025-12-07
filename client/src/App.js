@@ -1,8 +1,8 @@
 import React from "react";
 import {
   fetchBeaches,
-  fetchBeach,
   createBeach,
+  fetchBeach,
   deleteBeach,
   updateBeach,
 } from "./api";
@@ -10,25 +10,16 @@ import {
 class App extends React.Component {
   state = {
     beaches: [],
-    newName: "",
   };
 
-  // Load all beaches when the component mounts
+  // Load all beaches on page load
   componentDidMount() {
     this.loadBeaches();
   }
 
-  // Helper to refresh state
   loadBeaches = () => {
     fetchBeaches().then((data) => {
       this.setState({ beaches: data });
-    });
-  };
-
-  // CREATE
-  handleCreate = () => {
-    createBeach({ name: this.state.newName }).then(() => {
-      this.loadBeaches(); // refresh
     });
   };
 
@@ -39,10 +30,18 @@ class App extends React.Component {
     });
   };
 
-  // UPDATE (example: update only name)
+  // UPDATE (placeholder)
   handleUpdate = (id) => {
-    const updatedData = { name: prompt("New name?") };
+    const updatedData = { name: "Updated Beach Name" }; // example
     updateBeach(id, updatedData).then(() => {
+      this.loadBeaches();
+    });
+  };
+
+  // CREATE (placeholder)
+  handleCreate = () => {
+    const newData = { name: "New Beach" }; // example
+    createBeach(newData).then(() => {
       this.loadBeaches();
     });
   };
@@ -52,26 +51,17 @@ class App extends React.Component {
       <div style={{ padding: "2rem" }}>
         <h1>🌊 MarshVegas Beaches</h1>
 
-        {/* CREATE BEACH */}
-        <input
-          type="text"
-          placeholder="Beach name"
-          value={this.state.newName}
-          onChange={(e) => this.setState({ newName: e.target.value })}
-        />
-        <button onClick={this.handleCreate}>Add Beach</button>
-
-        {/* LIST BEACHES */}
         <ul>
           {this.state.beaches.map((b) => (
             <li key={b.id}>
               {b.name}
-              {"  "}
               <button onClick={() => this.handleDelete(b.id)}>Delete</button>
               <button onClick={() => this.handleUpdate(b.id)}>Update</button>
             </li>
           ))}
         </ul>
+
+        <button onClick={this.handleCreate}>Add Placeholder Beach</button>
       </div>
     );
   }

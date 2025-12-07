@@ -7,22 +7,26 @@ I had a lot of CHAT GBT help, but could not have rewritten it with out it.
 ## Available Scripts
 
 In the project's client directory, you can run:
-
 ### `npm start`
-
-When you promote, NPM RUN BUILD in client folder
 
 Runs the app in the development mode.\
 Open http://localhost:3001 to view it in your browser.
 
 The page will reload when you make changes.\
 
-### Deployment
+### Deployment run in Client Folder
 ## `npm run build`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.\
+
+In Server Folder, run node server.js
+
+Frontend → backend requests
+React is served on 3000
+Node/Express is listening on 3001
+So React calls: http://localhost:3001/beaches and cors() must allow localhost:3000.
 
 Will probably try to stay with Bulma for the Front End css Framework.

@@ -23,11 +23,6 @@ export function fetchBeaches() {
   return apiFetch("/beaches");
 }
 
-// FETCH ONE
-export function fetchBeach(id) {
-  return apiFetch(`/beaches/${id}`);
-}
-
 // CREATE A BEACH
 export function createBeach(data) {
   return apiFetch("/beaches", {
@@ -39,10 +34,11 @@ export function createBeach(data) {
 
 // UPDATE A BEACH
 export function updateBeach(id) {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-  return apiFetch(`/beaches/${id}`);
+    return apiFetch(`/beaches/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(id),
+    });
 }
 
 // DELETE A BEACH
@@ -50,5 +46,4 @@ export function deleteBeach(id) {
   return apiFetch(`/beaches/${id}`, {
     method:'DELETE',
   });
-
 }
