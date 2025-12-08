@@ -5,7 +5,32 @@ Render does not have free PostgrSQL databases because they have to pay money for
 I had a lot of CHAT GBT help, but could not have rewritten it with out it. 
 
 ## Available Scripts
+✔️ Fix #3 — Start the backend before React
 
+Always start in this order:
+
+1️⃣ Start server
+
+Terminal #1:
+
+cd server
+node server.js
+
+
+Look for:
+
+Server running on port 3001
+Connected to Neon PostgreSQL
+
+2️⃣ Then start React
+
+Terminal #2:
+
+cd client
+npm start
+
+
+If React starts before the backend, you get the fetch failure.
 In the project's client directory, you can run:
 ### `npm start`
 

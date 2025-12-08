@@ -1,7 +1,6 @@
 import React from "react";
 import {
   fetchBeaches,
-  fetchBeach,
   createBeach,
   updateBeach,
   deleteBeach,
@@ -20,167 +19,219 @@ class App extends React.Component {
       avail_rec: "",
       notes: "",
     },
-    editingBeachId: null,
-    editingBeach: {},
+    editBeachId: null,
+    editData: {},
   };
 
-  // --------------------------------------------------
-  // Load Data
-  // --------------------------------------------------
+  // ============================
+  // LOAD ALL BEACHES ON START
+  // ============================
   componentDidMount() {
     this.loadBeaches();
   }
 
   loadBeaches = () => {
-    fetchBeaches().then((data) => {
-      this.setState({ beaches: data });
-    });
+    fetchBeaches()
+      .then((data) => this.setState({ beaches: data }))
+      .catch((err) => console.error("Fetch error:", err));
   };
 
-  // --------------------------------------------------
-  // Handle Create Form Input
-  // --------------------------------------------------
-  handleNewInput = (e) => {
-    this.setState({
-      newBeach: {
-        ...this.state.newBeach,
-        [e.target.name]: e.target.value,
-      },
-    });
-  };
-
-  // --------------------------------------------------
-  // Create Beach
-  // --------------------------------------------------
+  // ============================
+  // CREATE BEACH
+  // ============================
   handleCreate = (e) => {
     e.preventDefault();
-    createBeach(this.state.newBeach).then(() => {
-      this.setState({
-        newBeach: {
-          name: "",
-          photo: "",
-          photo_credit: "",
-          access: "",
-          parking: "",
-          hours: "",
-          avail_rec: "",
-          notes: "",
-        },
-      });
-      this.loadBeaches();
+    createBeach(this.state.newBeach)
+      .then(() => {
+        this.loadBeaches();
+        this.setState({
+          newBeach: {
+            name: "",
+            photo: "",
+            photo_credit: "",
+            access: "",
+            parking: "",
+            hours: "",
+            avail_rec: "",
+            notes: "",
+          },
+        });
+      })
+      .catch((err) => console.error("Create error:", err));
+  };
+
+  handleNewChange = (e) => {
+    this.setState({
+      newBeach: { ...this.state.newBeach, [e.target.name]: e.target.value },
     });
   };
 
-  // --------------------------------------------------
-  // Begin Editing
-  // --------------------------------------------------
+  // ============================
+  // BEGIN EDIT MODE
+  // ============================
   startEdit = (beach) => {
     this.setState({
-      editingBeachId: beach.id,
-      editingBeach: { ...beach },
+      editBeachId: beach.id,
+      editData: { ...beach },
     });
   };
 
-  // --------------------------------------------------
-  // Handle Edit Inputs
-  // --------------------------------------------------
-  handleEditInput = (e) => {
+  handleEditChange = (e) => {
     this.setState({
-      editingBeach: {
-        ...this.state.editingBeach,
-        [e.target.name]: e.target.value,
-      },
+      editData: { ...this.state.editData, [e.target.name]: e.target.value },
     });
   };
 
-  // --------------------------------------------------
-  // Save Updated Beach
-  // --------------------------------------------------
+  // ============================
+  // UPDATE BEACH
+  // ============================
   handleUpdate = (e) => {
     e.preventDefault();
-    updateBeach(this.state.editingBeachId, this.state.editingBeach).then(() => {
-      this.setState({ editingBeachId: null, editingBeach: {} });
-      this.loadBeaches();
-    });
+    updateBeach(this.state.editBeachId, this.state.editData)
+      .then(() => {
+        this.loadBeaches();
+        this.setState({ editBeachId: null, editData: {} });
+      })
+      .catch((err) => console.error("Update error:", err));
   };
 
-  // --------------------------------------------------
-  // Delete Beach
-  // --------------------------------------------------
+  // ============================
+  // DELETE BEACH
+  // ============================
   handleDelete = (id) => {
-    deleteBeach(id).then(() => {
-      this.loadBeaches();
-    });
+    deleteBeach(id)
+      .then(() => this.loadBeaches())
+      .catch((err) => console.error("Delete error:", err));
   };
 
-  // --------------------------------------------------
+  // ============================
   // RENDER
-  // --------------------------------------------------
+  // ============================
   render() {
     return (
-      <div style={{ padding: "2rem" }}>
+      <div style={{ padding: "2rem", fontFamily: "Arial" }}>
         <h1>🌊 MarshVegas Beaches</h1>
 
-        {/* -----------------------------------------------
-            CREATE FORM
-        ------------------------------------------------ */}
-        <h2>Add a New Beach</h2>
+        {this.state.beaches.length === 0 ? (
+          <p>Loading beaches…</p>
+        ) : (
+          <ul>
+            {this.state.beaches.map((beach) => (
+              <li key={beach.id}>
+                <div className="container">
+                  <strong>{beach.name}</strong>
+                  <br />
+                  <img
+                    src={beach.photo}
+                    alt={beach.name}
+                    style={{ width: "200px", borderRadius: "8px" }}
+                  />
+                  <p>
+                    <em>{beach.photo_credit}</em>
+                  </p>
+                  <p>Access: {beach.access}</p>
+                  <p>Parking: {beach.parking}</p>
+                  <p>Hours: {beach.hours}</p>
+                  <p>Recreation: {beach.avail_rec}</p>
+                  <p>Notes: {beach.notes}</p>
+
+                  <button onClick={() => this.handleDelete(beach.id)}>
+                    Delete
+                  </button>
+                  <button onClick={() => this.startEdit(beach)}>Edit</button>
+
+                  {this.state.editBeachId === beach.id && (
+                    <form onSubmit={this.handleUpdate}>
+                      {Object.keys(this.state.editData).map(
+                        (field) =>
+                          field !== "id" && (
+                            <input
+                              key={field}
+                              name={field}
+                              value={this.state.editData[field]}
+                              onChange={this.handleEditChange}
+                              placeholder={field}
+                            />
+                          )
+                      )}
+                      <button type="submit">Save Changes</button>
+                    </form>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {/* =====================================
+             CREATE BEACH FORM
+        ====================================== */}
+        <h2>Create New Beach</h2>
         <form onSubmit={this.handleCreate}>
           {Object.keys(this.state.newBeach).map((field) => (
             <input
               key={field}
               name={field}
-              placeholder={field}
               value={this.state.newBeach[field]}
-              onChange={this.handleNewInput}
-              style={{ display: "block", margin: "5px 0" }}
+              onChange={this.handleNewChange}
+              placeholder={field}
+              style={{ display: "block", marginBottom: "6px" }}
             />
           ))}
-          <button type="submit">Create Beach</button>
+          <button type="submit">Add Beach</button>
         </form>
 
         <hr />
 
-        {/* -----------------------------------------------
-            BEACH LIST
-        ------------------------------------------------ */}
+        {/* =====================================
+             BEACH LIST
+        ====================================== */}
         <h2>All Beaches</h2>
+
         <ul>
-          {this.state.beaches.map((b) => (
-            <li key={b.id} style={{ marginBottom: "1.5rem" }}>
-              <strong>{b.name}</strong>
+          {this.state.beaches.map((beach) => (
+            <li key={beach.id} style={{ marginBottom: "1rem" }}>
+              <strong>{beach.name}</strong>
 
               {/* DELETE BUTTON */}
               <button
-                onClick={() => this.handleDelete(b.id)}
+                onClick={() => this.handleDelete(beach.id)}
                 style={{ marginLeft: "1rem" }}
               >
                 Delete
               </button>
 
-              {/* EDIT SECTION */}
-              {this.state.editingBeachId === b.id ? (
+              {/* EDIT BUTTON */}
+              <button
+                onClick={() => this.startEdit(beach)}
+                style={{ marginLeft: "0.5rem" }}
+              >
+                Edit
+              </button>
+
+              {/* =====================================
+                   EDIT FORM (Only for selected beach)
+              ====================================== */}
+              {this.state.editBeachId === beach.id && (
                 <form
                   onSubmit={this.handleUpdate}
-                  style={{ marginTop: "1rem" }}
+                  style={{ marginTop: "10px" }}
                 >
-                  {Object.keys(this.state.editingBeach).map(
+                  {Object.keys(this.state.editData).map(
                     (field) =>
                       field !== "id" && (
                         <input
                           key={field}
                           name={field}
+                          value={this.state.editData[field]}
+                          onChange={this.handleEditChange}
                           placeholder={field}
-                          value={this.state.editingBeach[field]}
-                          onChange={this.handleEditInput}
-                          style={{ display: "block", margin: "5px 0" }}
+                          style={{ display: "block", marginBottom: "6px" }}
                         />
                       )
                   )}
-                  <button type="submit">Save</button>
+                  <button type="submit">Save Changes</button>
                 </form>
-              ) : (
-                <button onClick={() => this.startEdit(b)}>Edit</button>
               )}
             </li>
           ))}

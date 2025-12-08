@@ -18,7 +18,7 @@ export async function apiFetch(path, options = {}) {
 
 // ---------- Specific API calls ----------
 
-// FETCH ALL
+// FETCH ALL is something missing?
 export function fetchBeaches() {
   return apiFetch("/beaches");
 }
@@ -33,11 +33,11 @@ export function createBeach(data) {
 }
 
 // UPDATE A BEACH
-export function updateBeach(id) {
+export function updateBeach(id, data) {
     return apiFetch(`/beaches/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(id),
+        body: JSON.stringify(data),
     });
 }
 

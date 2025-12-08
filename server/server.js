@@ -6,7 +6,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://marshvegasclient.onrender.com"],
+    origin: ["http://localhost:3000", "https://marshvegasclient.onrender.com"],
   })
 );
 
@@ -22,7 +22,7 @@ app.use("/beaches", beachesController);
 const PORT = process.env.PORT || 3001;
 
 app.get("/", (req, res) => {
-  res.send("API is running. Try /beaches");
+  res.send("API is running.");
 });
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
