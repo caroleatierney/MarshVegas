@@ -4,8 +4,10 @@ $pink: #fa7c91;
 $brown: #757763;
 $beige-light: #d0d1cd;
 $beige-lighter: #eff0eb;
+$sand: #E3DAC9;
+$light-sand: $sand;
 
-$primary: #00d1b2; // Example: change primary color
+$primary: #8BD3E6; // Example: change primary color
 $link: #3273dc;    // Example: change link color
 
 // Path to Bulma's sass folder
@@ -23,7 +25,28 @@ $link: #3273dc;    // Example: change link color
   background-color: $primary;
   color: #fff;
   border-radius: 5px;
+  padding: 0.75rem 1.5rem;   // ensures same size
+  font-weight: 600;
 }
+
+.box {
+  background-color: $light-sand;
+}
+
+.equal-buttons {
+  display: flex;
+  gap: 0.5rem;
+
+  .button {
+    flex: 1;     // each button takes equal width
+  }
+}
+
+.rounded-image {
+  border-radius: 25px;   /* adjust to taste */
+  overflow: hidden;      /* ensures the rounding clips the image */
+}
+
 
 // Import the Google Font
 @import url("https://fonts.googleapis.com/css?family=Nunito:400,700");
