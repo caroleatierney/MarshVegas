@@ -1,4 +1,7 @@
 import React from "react";
+// import "../my-bulma-project.scss";
+// import "bulma/css/bulma.min.css";
+
 import {
   fetchBeaches,
   createBeach,
@@ -109,8 +112,8 @@ class App extends React.Component {
   // ============================
   render() {
     return (
-      <div style={{ padding: "2rem", fontFamily: "Arial" }}>
-        <h1>🌊 MarshVegas Beaches</h1>
+      <div style={{ padding: "5rem"}}>
+        <h1>MarshVegas Beaches TEST</h1>
 
         {this.state.beaches.length === 0 ? (
           <p>Loading beaches…</p>
@@ -134,11 +137,23 @@ class App extends React.Component {
                   <p>Hours: {beach.hours}</p>
                   <p>Recreation: {beach.avail_rec}</p>
                   <p>Notes: {beach.notes}</p>
+                  <div class="buttons">
+                    {/* <button
+                      className="button is-primary"
+                      onClick={() => this.handleDelete(beach.id)}
+                    >
+                      DELETE
+                    </button> */}
 
-                  <button onClick={() => this.handleDelete(beach.id)}>
-                    Delete
-                  </button>
-                  <button onClick={() => this.startEdit(beach)}>Edit</button>
+                    <button
+                      className="button my-custom-button"
+                      onClick={() => this.handleDelete(beach.id)}
+                    >
+                      DELETE
+                    </button>
+
+                    <button onClick={() => this.startEdit(beach)}>Edit</button>
+                  </div>
 
                   {this.state.editBeachId === beach.id && (
                     <form onSubmit={this.handleUpdate}>
