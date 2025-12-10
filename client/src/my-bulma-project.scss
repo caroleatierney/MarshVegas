@@ -1,11 +1,15 @@
 // Set your brand colors
-$purple: #8a4d76;
-$pink: #fa7c91;
-$brown: #757763;
-$beige-light: #d0d1cd;
-$beige-lighter: #eff0eb;
-$sand: #E3DAC9;
-$light-sand: $sand;
+$slate-blue-light:#7798c2;
+$dark-brown:#37312f;
+$mushroom: #807b75;
+$sand:#dad3c7;
+$sky-blue:#67a2ef;
+$light-grey:#a7b0b8;
+$charcoal:#4b4b55;
+$cdark-slate:#2f465f;
+$army-brown:#9d6a41;
+$powder-blue:#8bccfb;
+$medium-slate-blue:#5c71a0;
 
 $primary: #8BD3E6; // Example: change primary color
 $link: #3273dc;    // Example: change link color
@@ -13,12 +17,12 @@ $link: #3273dc;    // Example: change link color
 // Path to Bulma's sass folder
 @use "bulma/sass" with (
   $family-primary: '"Nunito", sans-serif',
-  $grey-dark: $brown,
-  $grey-light: $beige-light,
-  $primary: $purple,
-  $link: $pink,
-  $control-border-width: 2px,
-  $input-shadow: none
+  // $grey-dark: $brown,
+  // $grey-light: $beige-light,
+  // $primary: $purple,
+  // $link: $pink,
+  // $control-border-width: 2px,
+  // $input-shadow: none
 );
 
 .my-custom-button {
@@ -30,7 +34,11 @@ $link: #3273dc;    // Example: change link color
 }
 
 .box {
-  background-color: $light-sand;
+  background-color: $sand;
+}
+
+.container {
+  background-color: $slate-blue-light;
 }
 
 .equal-buttons {

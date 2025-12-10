@@ -86,74 +86,111 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="container mt-5">
-        <h1 className="title has-text-centered">MarshVegas Beaches</h1>
+      <section className="hero has-text-centered">
+        <h1 className="title is-1">Welcome Marshfield Beach Goers!</h1>
+
+        <figure className="image is-vcentered">
+          <img src="https://i.imgur.com/Yb9vS4A.jpg" alt="" />
+          <h3>photo credit: Shoreline Aviation</h3>
+          <h1 className="title is-2 mt-4">Below is your Beach Bucket list!</h1>
+        </figure>
+
+        <h1 className="title has-text-centered mt-5">MarshVegas Beaches</h1>
 
         {this.state.beaches.length === 0 ? (
           <p>Loading beaches…</p>
         ) : (
           <ul>
-            {this.state.beaches.map((beach) => (
-              <li key={beach.id} className="box mb-5">
-                <h2 className="subtitle has-text-centered">{beach.name}</h2>
+            {this.state.beaches.map((beach) => {
+              const parkingArray = beach.parking?.split(",") || [];
+              const hoursArray = beach.hours?.split(",") || [];
+              const recArray = beach.avail_rec?.split(",") || [];
 
-                <figure class="image is-128X128 rounded-image">
-                  <img src={beach.photo} alt={beach.name} />
-                </figure>
+              return (
+                <li key={beach.id} className="box m-5">
+                  <h2 className="subtitle has-text-centered">{beach.name}</h2>
 
-                <p className="has-text-centered">
-                  <em>Photo Credit: {beach.photo_credit}</em>
-                </p>
-                <p>Access: {beach.access}</p>
-                <p>Parking: {beach.parking}</p>
-                <p>Hours: {beach.hours}</p>
-                <p>Recreation: {beach.avail_rec}</p>
-                <p>Notes: {beach.notes}</p>
+                  <figure className="image is-128X128 rounded-image">
+                    <img src={beach.photo} alt={beach.name} />
+                  </figure>
 
-                <div className="buttons equal-buttons">
-                  <button
-                    className="button my-custom-button"
-                    onClick={() => this.handleDelete(beach.id)}
-                  >
-                    Delete
-                  </button>
+                  <p className="has-text-centered">
+                    <em>Photo Credit: {beach.photo_credit}</em>
+                  </p>
 
-                  <button
-                    className="button my-custom-button"
-                    onClick={() => this.startEdit(beach)}
-                  >
-                    Edit
-                  </button>
-                </div>
+                  <details>
+                    <summary>Parking Details</summary>
+                    <ul>
+                      {parkingArray.map((p, idx) => (
+                        <li key={idx}>{p}</li>
+                      ))}
+                    </ul>
+                  </details>
 
-                {this.state.editBeachId === beach.id && (
-                  <form onSubmit={this.handleUpdate}>
-                    {Object.keys(this.state.editData).map(
-                      (field) =>
-                        field !== "id" && (
-                          <input
-                            key={field}
-                            className="input mb-2"
-                            name={field}
-                            value={this.state.editData[field]}
-                            onChange={this.handleEditChange}
-                            placeholder={field}
-                          />
-                        )
-                    )}
-                    <button className="button is-link mt-2" type="submit">
-                      Save Changes
+                  <details>
+                    <summary>Hours</summary>
+                    <ul>
+                      {hoursArray.map((p, idx) => (
+                        <li key={idx}>{p}</li>
+                      ))}
+                    </ul>
+                  </details>
+
+                  <details>
+                    <summary>Recreation</summary>
+                    <ul>
+                      {recArray.map((p, idx) => (
+                        <li key={idx}>{p}</li>
+                      ))}
+                    </ul>
+                  </details>
+
+                  <p>Notes: {beach.notes}</p>
+
+                  <div className="buttons equal-buttons">
+                    <button
+                      className="button my-custom-button"
+                      onClick={() => this.handleDelete(beach.id)}
+                    >
+                      Delete
                     </button>
-                  </form>
-                )}
-              </li>
-            ))}
+
+                    <button
+                      className="button my-custom-button"
+                      onClick={() => this.startEdit(beach)}
+                    >
+                      Edit
+                    </button>
+                  </div>
+
+                  {this.state.editBeachId === beach.id && (
+                    <form onSubmit={this.handleUpdate}>
+                      {Object.keys(this.state.editData).map(
+                        (field) =>
+                          field !== "id" && (
+                            <input
+                              key={field}
+                              className="input mb-2"
+                              name={field}
+                              value={this.state.editData[field]}
+                              onChange={this.handleEditChange}
+                              placeholder={field}
+                            />
+                          )
+                      )}
+                      <button className="button is-link mt-2" type="submit">
+                        Save Changes
+                      </button>
+                    </form>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         )}
 
         <hr />
 
-        {/* CREATE BEACH FORM */}
         <h2 className="title is-4 mt-5">Create New Beach</h2>
 
         <form onSubmit={this.handleCreate}>
@@ -171,7 +208,7 @@ class App extends React.Component {
             Add Beach
           </button>
         </form>
-      </div>
+      </section>
     );
   }
 }
