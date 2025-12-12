@@ -63,7 +63,15 @@ $link: #3273dc;    // Example: change link color
   padding: 10px 0;
 }
 
-.list li img {
+.list-col {
+  display: flex-col;
+  gap: 10px;
+  list-style: none;
+  justify-content: space-evenly;
+  padding: 10px 0;
+}
+
+.list-col li img {
   width: 80px;       /* adjust as needed */
   height: auto;
   border-radius: 8px;
