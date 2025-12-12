@@ -49,7 +49,7 @@ Test to push to Production# Final Project:  *marshfieldbeachapp*
 * 
 
 ### Explains which improvements you might make
-* would lke to have used multiple files
+* would like to have used multiple files
 
 ### Extras:
 * used an api

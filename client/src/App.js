@@ -43,23 +43,37 @@ class App extends React.Component {
   //**************** GET TIDES ********************
   //***********************************************
   getTides = (event) => {
-    // console.log(this.state.lat);
-    // console.log(this.state.long);
+    console.log(this.state.lat);
+    console.log(this.state.long);
+
+    const { lat, long } = this.state;
+    const apiKey = process.env.REACT_APP_STORMGLASS_API_KEY;
+    const today = new Date();
+    const yyyyMmDd = today.toISOString().split("T")[0]; // "2025-12-12"
 
     fetch(
-      "https://tides.p.rapidapi.com/tides?latitude=" +
-        this.state.lat +
-        "&longitude=" +
-        this.state.long,
+      `https://api.stormglass.io/v2/tide/extremes/point?lat=${lat}&lng=${long}&start=${yyyyMmDd}&end=${yyyyMmDd}`,
       {
-        method: "GET",
         headers: {
-          "x-rapidapi-host": "tides.p.rapidapi.com",
-          "x-rapidapi-key":
-            "72f2d4d192mshd7feaecf8ffd802p140faajsna045792ab384",
+          Authorization: apiKey,
         },
       }
     )
+      // fetch(
+      // "https://tides.p.rapidapi.com/tides?latitude=" +
+      //   this.state.lat +
+      //   "&longitude=" +
+      //   this.state.long,
+      // {
+      //   method: "GET",
+      //   headers: {
+      //     "x-rapidapi-host": "tides.p.rapidapi.com",
+      //     "x-rapidapi-key":
+      //       "72f2d4d192mshd7feaecf8ffd802p140faajsna045792ab384",
+      //   },
+      // }
+      // )
+
       .then((response) => response.json())
       .then((data) => {
         if (!data || !data.extremes || data.extremes.length === 0) {
@@ -111,20 +125,15 @@ class App extends React.Component {
         });
       });
 
-        // console.log(data);
-        // console.log(data.extremes);
-        // console.log(data.extremes[0].datetime);
+    // console.log(data);
+    // console.log(data.extremes);
+    // console.log(data.extremes[0].datetime);
 
-  
-          // console.log(i);
-          // console.log(extremeNewDate);
-          // console.log(extremeDate);
-          // console.log(extremeTime);
-          // console.log(extremeRoundedHeight);
-
-
-
-  
+    //   console.log(i);
+    //   console.log(extremeNewDate);
+    //   console.log(extremeDate);
+    //   console.log(extremeTime);
+    //   console.log(extremeRoundedHeight);
   };
 
   loadBeaches = () => {
