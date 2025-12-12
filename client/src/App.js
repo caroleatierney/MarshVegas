@@ -118,32 +118,36 @@ class App extends React.Component {
                     <em>Photo Credit: {beach.photo_credit}</em>
                   </p>
 
-                  <details>
-                    <summary>Parking Details</summary>
-                    <ul>
-                      {parkingArray.map((p, idx) => (
-                        <li key={idx}>{p}</li>
-                      ))}
-                    </ul>
-                  </details>
+                  <div className="list">
+                    <details>
+                      <summary>Parking Details</summary>
+                      <ul className="list">
+                        {parkingArray.map((p, idx) => (
+                          <li key={idx}>{p}</li>
+                        ))}
+                      </ul>
+                    </details>
 
-                  <details>
-                    <summary>Hours</summary>
-                    <ul>
-                      {hoursArray.map((p, idx) => (
-                        <li key={idx}>{p}</li>
-                      ))}
-                    </ul>
-                  </details>
+                    <details>
+                      <summary>Hours</summary>
+                      <ul>
+                        {hoursArray.map((p, idx) => (
+                          <li key={idx}>{p}</li>
+                        ))}
+                      </ul>
+                    </details>
 
-                  <details>
-                    <summary>Recreation</summary>
-                    <ul>
-                      {recArray.map((p, idx) => (
-                        <li key={idx}>{p}</li>
-                      ))}
-                    </ul>
-                  </details>
+                    <details>
+                      <summary>Recreation</summary>
+                      <ul className="list">
+                        {recArray.map((p, idx) => (
+                          <li key={idx}>
+                            <img src={p} alt=""></img>
+                          </li>
+                        ))}
+                      </ul>
+                    </details>
+                  </div>
 
                   <p>Notes: {beach.notes}</p>
 
