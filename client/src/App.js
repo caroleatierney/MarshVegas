@@ -42,7 +42,7 @@ class App extends React.Component {
   //***********************************************
   //**************** GET TIDES ********************
   //***********************************************
-  getTides = (event) => {
+  getTides = () => {
     console.log(this.state.lat);
     console.log(this.state.long);
 
@@ -51,74 +51,84 @@ class App extends React.Component {
     const today = new Date();
     const yyyyMmDd = today.toISOString().split("T")[0]; // "2025-12-12"
 
+    const start = `${yyyyMmDd} 00:00`;
+    const end = `${yyyyMmDd} 23:59`;
+
     fetch(
-      `https://api.stormglass.io/v2/tide/extremes/point?lat=${lat}&lng=${long}&start=${yyyyMmDd}&end=${yyyyMmDd}`,
+      `https://api.stormglass.io/v2/tide/extremes/point?lat=${lat}&lng=${long}&start=${start}&end=${end}`,
       {
         headers: {
           Authorization: apiKey,
         },
       }
     )
-      // fetch(
-      // "https://tides.p.rapidapi.com/tides?latitude=" +
-      //   this.state.lat +
-      //   "&longitude=" +
-      //   this.state.long,
-      // {
-      //   method: "GET",
-      //   headers: {
-      //     "x-rapidapi-host": "tides.p.rapidapi.com",
-      //     "x-rapidapi-key":
-      //       "72f2d4d192mshd7feaecf8ffd802p140faajsna045792ab384",
-      //   },
-      // }
-      // )
 
-      .then((response) => response.json())
+      .then((response) => {
+        console.log("Status:", response.status);
+        return response.json();
+      })
       .then((data) => {
-        if (!data || !data.extremes || data.extremes.length === 0) {
+        console.log("Raw tide data:", data);
+        const extremes = data.data || [];
+
+        if (!extremes || extremes.length === 0) {
           console.error("No tide data returned:", data);
+          // Set ALL rows to "No tide data" ONLY when empty
+          this.setState({
+            high1: "No tide data",
+            highDate1: "",
+            highTime1: "",
+            highHeight1: "",
+            low1: "No tide data",
+            lowDate1: "",
+            lowTime1: "",
+            lowHeight1: "",
+            high2: "No tide data",
+            highDate2: "",
+            highTime2: "",
+            highHeight2: "",
+            low2: "No tide data",
+            lowDate2: "",
+            lowTime2: "",
+            lowHeight2: "",
+          });
           return;
         }
 
-        // Make sure we don’t try to read more tides than exist
-        const count = Math.min(4, data.extremes.length);
+        // Process real data when available
+        const count = Math.min(4, extremes.length);
         const date = [];
         const time = [];
         const height = [];
 
         for (let i = 0; i < count; i++) {
-          const entry = data.extremes[i];
+          const entry = extremes[i];
           if (!entry) continue;
 
-          let extremeNewDate = new Date(entry.datetime);
-          let extremeTime = extremeNewDate.toLocaleTimeString();
-          let extremeDate = extremeNewDate.toLocaleDateString();
-          let extremeHeight = entry.height;
-          let extremeRoundedHeight = Math.round(extremeHeight * 100) / 100;
-
-          date[i] = extremeDate;
-          time[i] = extremeTime;
-          height[i] = extremeRoundedHeight;
+          const extremeNewDate = new Date(entry.time || entry.datetime);
+          date[i] = extremeNewDate.toLocaleDateString();
+          time[i] = extremeNewDate.toLocaleTimeString();
+          height[i] = Math.round(entry.height * 100) / 100;
         }
 
+        // Set real data - missing slots stay as previous values or blank
         this.setState({
-          high1: data.extremes[0]?.state || "",
+          high1: extremes[0]?.type || "",
           highDate1: date[0] || "",
           highTime1: time[0] || "",
           highHeight1: height[0] || "",
 
-          low1: data.extremes[1]?.state || "",
+          low1: extremes[1]?.type || "",
           lowDate1: date[1] || "",
           lowTime1: time[1] || "",
           lowHeight1: height[1] || "",
 
-          high2: data.extremes[2]?.state || "",
+          high2: extremes[2]?.type || "",
           highDate2: date[2] || "",
           highTime2: time[2] || "",
           highHeight2: height[2] || "",
 
-          low2: data.extremes[3]?.state || "",
+          low2: extremes[3]?.type || "",
           lowDate2: date[3] || "",
           lowTime2: time[3] || "",
           lowHeight2: height[3] || "",
@@ -224,7 +234,7 @@ class App extends React.Component {
                 <li key={beach.id} className="box m-5">
                   <h2 className="subtitle has-text-centered">{beach.name}</h2>
 
-                  <figure className="image is-128X128 rounded-image">
+                  <figure className="image is-96X96 rounded-image">
                     <img src={beach.photo} alt={beach.name} />
                   </figure>
 
@@ -263,25 +273,30 @@ class App extends React.Component {
                     </details>
 
                     <details>
-                        <summary
-                          onClick={() => {
-                            this.setState(
-                              { lat: beach.latitude, long: beach.longitude },
-                              this.getTides
-                            );
-                          }}
-                        >
-                          tides
-                     </summary>
+                      <summary
+                        onClick={() => {
+                          this.setState(
+                            { lat: beach.latitude, long: beach.longitude },
+                            () => {
+                              this.getTides(); // Call WITHOUT callback
+                            }
+                          );
+                        }}
+                      >
+                        tides
+                      </summary>
 
-                    <div>
-                        <table border="1">
+                      <div className="has-text-centered">
+                        <table
+                          className="table is-bordered is-narrow is-hoverable is-fullwidth tide-table"
+                          style={{ width: "auto", margin: "0 auto" }}
+                        >
                           <thead>
                             <tr key={beach.id}>
-                              <th>Extreme</th>
-                              <th>Date</th>
-                              <th>Time</th>
-                              <th>Height</th>
+                              <th className="has-text-centered">Extreme</th>
+                              <th className="has-text-centered">Date</th>
+                              <th className="has-text-centered">Time</th>
+                              <th className="has-text-centered">Height</th>
                             </tr>
                           </thead>
 
@@ -312,7 +327,6 @@ class App extends React.Component {
                             </tr>
                           </tbody>
                         </table>
-                        <p>Not suitable for navigation purposes</p>
                       </div>
                     </details>
                   </div>

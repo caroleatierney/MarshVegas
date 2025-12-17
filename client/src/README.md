@@ -4,6 +4,8 @@ Render does not have free PostgrSQL databases because they have to pay money for
 
 I had a lot of CHAT GBT help, but could not have rewritten it with out it. 
 
+You need to be on https://marshvegasclient.onrender.com/ to see the website.
+
 ## Available Scripts
 ✔️ Fix #3 — Start the backend before React
 

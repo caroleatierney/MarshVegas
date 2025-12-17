@@ -10,6 +10,7 @@ $cdark-slate:#2f465f;
 $army-brown:#9d6a41;
 $powder-blue:#8bccfb;
 $medium-slate-blue:#5c71a0;
+$light-sand: #f0e9dc;
 
 $primary: #8BD3E6; // Example: change primary color
 $link: #3273dc;    // Example: change link color
@@ -44,7 +45,6 @@ $link: #3273dc;    // Example: change link color
 .equal-buttons {
   display: flex;
   gap: 0.5rem;
-
   .button {
     flex: 1;     // each button takes equal width
   }
@@ -75,6 +75,10 @@ $link: #3273dc;    // Example: change link color
   width: 80px;       /* adjust as needed */
   height: auto;
   border-radius: 8px;
+}
+
+.tide-table {
+  background-color: $light-sand;
 }
 
 // Import the Google Font
