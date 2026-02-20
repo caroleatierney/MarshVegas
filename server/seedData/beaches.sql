@@ -71,7 +71,7 @@ VALUES (
         'Weekday: $15, Weekend: $20, Holidays: $20, Residents Annual Fee: $45, (Annual Fee is $40 before April 30)',
         'Monday: 6am - 10pm, Tuesday: 6am - 10pm, Wednesday: 6am - 10pm, Thursday: 6am - 10pm,  Friday: 6am - 10pm, Saturday: 6am - 10pm, Sunday: 6am - 10pm',
         'https://i.imgur.com/FAOW8rW.png, https://i.imgur.com/EJwnOgi.png, https://i.imgur.com/gSIFxt4.png https://i.imgur.com/huyrFri.png',
-        'Burkes Beach is a great beach for families with young children,  The water is never brought and it is warmer because it is part of the bay.  The giant jetty is a favorite among my kids.  They always look forward to hopping over the wide gaps between the rocks and making it the end.  There are crabs, snails, hermit crabs and even lobsters in the rocks where the jetty meets the water.  Kids often walk to the General Store to get penny candy and/or a sandwich and soda.  There Green Harbor Lobster Pound has great food.  There is also bridge jumping!',
+        'Burkes Beach is a great beach for families with young children,  The water is never rough and it is warmer because it is part of the bay.  The giant jetty is a favorite among my kids.  They always look forward to hopping over the wide gaps between the rocks and making it the end.  There are crabs, snails, hermit crabs and even lobsters in the rocks where the jetty meets the water.  Kids often walk to the General Store to get penny candy and/or a sandwich and soda.  There Green Harbor Lobster Pound has great food.  There is also bridge jumping!',
         42.077,
         -70.646
     );

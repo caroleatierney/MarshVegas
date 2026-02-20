@@ -211,12 +211,12 @@ class App extends React.Component {
   render() {
     return (
       <section className="hero has-text-centered">
-        <h1 className="title is-1">Welcome Marshfield Beach Goers!</h1>
+        <h1 className="title is-1 pt-5">Welcome Marshfield Beach Goers!</h1>
 
         <figure className="image is-vcentered">
           <img src="https://i.imgur.com/Yb9vS4A.jpg" alt="" />
           <h3>photo credit: Shoreline Aviation</h3>
-          <h1 className="title is-2 mt-4">Below is your Beach Bucket list!</h1>
+          <h1 className="title is-2 mt-4">Below is your Beach bucket list!</h1>
         </figure>
 
         <h1 className="title has-text-centered mt-5">MarshVegas Beaches</h1>
@@ -232,143 +232,148 @@ class App extends React.Component {
 
               return (
                 <li key={beach.id} className="box m-5">
-                  <h2 className="subtitle has-text-centered">{beach.name}</h2>
+                  <h2 className="subtitle has-text-centered is-size-1 has-text-weight-bold is-underlined mb-5">
+                    {beach.name}
+                  </h2>
 
-                  <figure className="image is-96X96 rounded-image">
-                    <img src={beach.photo} alt={beach.name} />
-                  </figure>
+                  <div className="columns">
+                    <div className="column">
+                      <figure className="image is-96X96 rounded-image">
+                        <img src={beach.photo} alt={beach.name} />
+                      </figure>
 
-                  <p className="has-text-centered">
-                    <em>Photo Credit: {beach.photo_credit}</em>
-                  </p>
+                      <p className="has-text-centered">
+                        <em>Photo Credit: {beach.photo_credit}</em>
+                      </p>
+                    </div>
 
-                  <div className="list-col">
-                    <details>
-                      <summary>Parking Details</summary>
-                      <ul className="list">
-                        {parkingArray.map((p, idx) => (
-                          <li key={idx}>{p}</li>
-                        ))}
-                      </ul>
-                    </details>
+                    <div className="column is-vertically-spaced pt-5">
+                      <details>
+                        <summary>Parking Details</summary>
+                        <ul className="list">
+                          {parkingArray.map((p, idx) => (
+                            <li key={idx}>{p}</li>
+                          ))}
+                        </ul>
+                      </details>
 
-                    <details>
-                      <summary>General Hours and Access</summary>
-                      <ul className="list-col">
-                        {hoursArray.map((p, idx) => (
-                          <li key={idx}>{p}</li>
-                        ))}
-                      </ul>
-                    </details>
+                      <details>
+                        <summary>General Hours and Access</summary>
+                        <ul className="list-col">
+                          {hoursArray.map((p, idx) => (
+                            <li key={idx}>{p}</li>
+                          ))}
+                        </ul>
+                      </details>
 
-                    <details>
-                      <summary>Recreation</summary>
-                      <ul className="list">
-                        {recArray.map((p, idx) => (
-                          <li key={idx}>
-                            <img src={p} alt=""></img>
-                          </li>
-                        ))}
-                      </ul>
-                    </details>
+                      <details>
+                        <summary>Recreation</summary>
+                        <ul className="list">
+                          {recArray.map((p, idx) => (
+                            <li key={idx}>
+                              <img src={p} alt=""></img>
+                            </li>
+                          ))}
+                        </ul>
+                      </details>
 
-                    <details>
-                      <summary
-                        onClick={() => {
-                          this.setState(
-                            { lat: beach.latitude, long: beach.longitude },
-                            () => {
-                              this.getTides(); // Call WITHOUT callback
-                            }
-                          );
-                        }}
-                      >
-                        tides
-                      </summary>
-
-                      <div className="has-text-centered">
-                        <table
-                          className="table is-bordered is-narrow is-hoverable is-fullwidth tide-table"
-                          style={{ width: "auto", margin: "0 auto" }}
+                      <details>
+                        <summary
+                          onClick={() => {
+                            this.setState(
+                              { lat: beach.latitude, long: beach.longitude },
+                              () => {
+                                this.getTides(); // Call WITHOUT callback
+                              }
+                            );
+                          }}
                         >
-                          <thead>
-                            <tr key={beach.id}>
-                              <th className="has-text-centered">Extreme</th>
-                              <th className="has-text-centered">Date</th>
-                              <th className="has-text-centered">Time</th>
-                              <th className="has-text-centered">Height</th>
-                            </tr>
-                          </thead>
+                          tides
+                        </summary>
 
-                          <tbody>
-                            <tr>
-                              <td> {this.state.high1} </td>
-                              <td> {this.state.highDate1} </td>
-                              <td> {this.state.highTime1} </td>
-                              <td> {this.state.highHeight1} </td>
-                            </tr>
-                            <tr>
-                              <td> {this.state.low1} </td>
-                              <td> {this.state.lowDate1} </td>
-                              <td> {this.state.lowTime1} </td>
-                              <td> {this.state.lowHeight1} </td>
-                            </tr>
-                            <tr>
-                              <td> {this.state.high2} </td>
-                              <td> {this.state.highDate2} </td>
-                              <td> {this.state.highTime2} </td>
-                              <td> {this.state.highHeight2} </td>
-                            </tr>
-                            <tr>
-                              <td> {this.state.low2} </td>
-                              <td> {this.state.lowDate2} </td>
-                              <td> {this.state.lowTime2} </td>
-                              <td> {this.state.lowHeight2} </td>
-                            </tr>
-                          </tbody>
-                        </table>
+                        <div className="has-text-centered">
+                          <table
+                            className="table is-bordered is-narrow is-hoverable is-fullwidth tide-table"
+                            style={{ width: "auto", margin: "0 auto" }}
+                          >
+                            <thead>
+                              <tr key={beach.id}>
+                                <th className="has-text-centered">Extreme</th>
+                                <th className="has-text-centered">Date</th>
+                                <th className="has-text-centered">Time</th>
+                                <th className="has-text-centered">Height</th>
+                              </tr>
+                            </thead>
+
+                            <tbody>
+                              <tr>
+                                <td> {this.state.high1} </td>
+                                <td> {this.state.highDate1} </td>
+                                <td> {this.state.highTime1} </td>
+                                <td> {this.state.highHeight1} </td>
+                              </tr>
+                              <tr>
+                                <td> {this.state.low1} </td>
+                                <td> {this.state.lowDate1} </td>
+                                <td> {this.state.lowTime1} </td>
+                                <td> {this.state.lowHeight1} </td>
+                              </tr>
+                              <tr>
+                                <td> {this.state.high2} </td>
+                                <td> {this.state.highDate2} </td>
+                                <td> {this.state.highTime2} </td>
+                                <td> {this.state.highHeight2} </td>
+                              </tr>
+                              <tr>
+                                <td> {this.state.low2} </td>
+                                <td> {this.state.lowDate2} </td>
+                                <td> {this.state.lowTime2} </td>
+                                <td> {this.state.lowHeight2} </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </details>
+                      <p>{beach.notes}</p>
+
+                      <div className="buttons is-normal is-centered pt-5">
+                        <button
+                          className="button my-custom-button"
+                          onClick={() => this.handleDelete(beach.id)}
+                        >
+                          Delete
+                        </button>
+
+                        <button
+                          className="button my-custom-button"
+                          onClick={() => this.startEdit(beach)}
+                        >
+                          Edit
+                        </button>
                       </div>
-                    </details>
+                    </div>
+
+                    {this.state.editBeachId === beach.id && (
+                      <form onSubmit={this.handleUpdate}>
+                        {Object.keys(this.state.editData).map(
+                          (field) =>
+                            field !== "id" && (
+                              <input
+                                key={field}
+                                className="input mb-2"
+                                name={field}
+                                value={this.state.editData[field]}
+                                onChange={this.handleEditChange}
+                                placeholder={field}
+                              />
+                            )
+                        )}
+                        <button className="button is-link mt-2" type="submit">
+                          Save Changes
+                        </button>
+                      </form>
+                    )}
                   </div>
-
-                  <p>{beach.notes}</p>
-
-                  <div className="buttons equal-buttons">
-                    <button
-                      className="button my-custom-button"
-                      onClick={() => this.handleDelete(beach.id)}
-                    >
-                      Delete
-                    </button>
-
-                    <button
-                      className="button my-custom-button"
-                      onClick={() => this.startEdit(beach)}
-                    >
-                      Edit
-                    </button>
-                  </div>
-
-                  {this.state.editBeachId === beach.id && (
-                    <form onSubmit={this.handleUpdate}>
-                      {Object.keys(this.state.editData).map(
-                        (field) =>
-                          field !== "id" && (
-                            <input
-                              key={field}
-                              className="input mb-2"
-                              name={field}
-                              value={this.state.editData[field]}
-                              onChange={this.handleEditChange}
-                              placeholder={field}
-                            />
-                          )
-                      )}
-                      <button className="button is-link mt-2" type="submit">
-                        Save Changes
-                      </button>
-                    </form>
-                  )}
                 </li>
               );
             })}
