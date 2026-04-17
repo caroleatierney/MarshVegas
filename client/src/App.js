@@ -238,6 +238,7 @@ class App extends React.Component {
                         {beach.name}
                       </h2>
                       <figure className="image is-96X96 rounded-image">
+                        consol.log(image url)
                         <img src={beach.photo} alt={beach.name} />
                       </figure>
 
@@ -291,7 +292,7 @@ class App extends React.Component {
                             tides
                           </summary>
 
-                          <div className="has-text-centered">
+                          <div className="has-text-centered is-size-6">
                             <table
                               className="table is-bordered is-narrow is-hoverable is-fullwidth tide-table"
                               style={{ width: "auto", margin: "0 auto" }}

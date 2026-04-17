@@ -26,6 +26,14 @@ $link: #3273dc;    // Example: change link color
   // $input-shadow: none
 );
 
+html {
+  font-size: 16px;
+}
+
+body {
+  font-size: 2rem;
+}
+
 .my-custom-button {
   background-color: $primary;
   color: #fff;
