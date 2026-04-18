@@ -238,7 +238,9 @@ class App extends React.Component {
                         {beach.name}
                       </h2>
                       <figure className="image is-96X96 rounded-image">
-                        consol.log(image url)
+                        
+                        console.log({beach.photo})
+                        
                         <img src={beach.photo} alt={beach.name} />
                       </figure>
 

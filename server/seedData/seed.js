@@ -36,7 +36,7 @@ async function seed() {
 
       ('Burkes Beach', 'https://i.imgur.com/P9mTqEB.jpg', 'rightcitydata.com', 'Public', 'Weekday: $15, Weekend: $20...', 'Monday: 6am - 10pm...', 'https://i.imgur.com/FAOW8rW.png, https://i.imgur.com/EJwnOgi.png...', 'Burkes Beach is a great beach for families...', 42.077, -70.646),
 
-      ('Fieldston Beach', 'https://i.imgur.com/Jp5viWD.jpg', 'NSRWA', 'Public', 'Limited resident parking...', 'Monday: 6am - 10pm...', 'https://i.imgur.com/FAOW8rW.png...', 'Adjacent to Sunrise Beach...', 42.108, -70.663),
+      ('Fieldston Beach', 'https://i.imgur.com/dIoS4XR.jpg', 'NSRWA', 'Public', 'Limited resident parking...', 'Monday: 6am - 10pm...', 'https://i.imgur.com/FAOW8rW.png...', 'Adjacent to Sunrise Beach...', 42.108, -70.663),
 
       ('Brant Rock Beach', 'https://i.imgur.com/bXIvGgd.jpg', 'FidoLoves.org', 'Public', 'Resident sticker parking...', 'Monday: 6am - 10pm...', 'https://i.imgur.com/FAOW8rW.png...', 'Brant Rock Beach is dog friendly...', 42.090, -70.641),
 

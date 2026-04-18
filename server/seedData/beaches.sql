@@ -91,12 +91,12 @@ INSERT INTO
     )
 VALUES (
         'Fieldston Beach',
-        'https://i.imgur.com/Jp5viWD.jpg',
+        'https://i.imgur.com/dioS4XR.jpg',
         'North and South Rivers Watershed Association',
         'Public',
         'Limited resident parking on Old Beach Road. Located at the end of Hartford Road.',
         'Monday: 6am - 10pm, Tuesday: 6am - 10pm, Wednesday: 6am - 10pm, Thursday: 6am - 10pm,  Friday: 6am - 10pm, Saturday: 6am - 10pm, Sunday: 6am - 10pm',
-        'https://i.imgur.com/FAOW8rW.png, https://i.imgur.com/Af9dWrz.png, https://i.imgur.com/gSIFxt4.png https://i.imgur.com/huyrFri.png',
+        'https://i.imgur.com/FAOW8rW.png, https://imgur.com/a/dIoS4XR.jpg, https://i.imgur.com/gSIFxt4.png https://i.imgur.com/huyrFri.png',
         'Adjacent to Sunrise Beach, Fieldson also boasts beautiful sunrises.  The beach diminishes when the tide comes in.  This beach is mostly visited by the residents and vacationers in Fieldston.',
         42.108,
         -70.663
