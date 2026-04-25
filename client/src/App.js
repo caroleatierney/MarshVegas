@@ -42,99 +42,72 @@ class App extends React.Component {
   //***********************************************
   //**************** GET TIDES ********************
   //***********************************************
-  getTides = () => {
-    console.log(this.state.lat);
-    console.log(this.state.long);
+getTides = async () => {
+  const { lat, long } = this.state;
 
-    const { lat, long } = this.state;
-    const apiKey = process.env.REACT_APP_STORMGLASS_API_KEY;
-    const today = new Date();
-    const yyyyMmDd = today.toISOString().split("T")[0]; // "2025-12-12"
+  try {
+    const response = await fetch(
+      `https://marshvegas.onrender.com/beaches/tides?lat=${lat}&long=${long}`
+    );
 
-    const start = `${yyyyMmDd} 00:00`;
-    const end = `${yyyyMmDd} 23:59`;
+    console.log("Status:", response.status);
 
-    fetch(
-      `https://api.stormglass.io/v2/tide/extremes/point?lat=${lat}&lng=${long}&start=${start}&end=${end}`,
-      {
-        headers: {
-          Authorization: apiKey,
-        },
-      }
-    )
+    const contentType = response.headers.get("content-type");
 
-      .then((response) => {
-        console.log("Status:", response.status);
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Raw tide data:", data);
-        const extremes = data.data || [];
+    if (!contentType || !contentType.includes("application/json")) {
+      const text = await response.text();
+      console.error("Non-JSON response:", text);
+      throw new Error("Response was not JSON");
+    }
 
-        if (!extremes || extremes.length === 0) {
-          console.error("No tide data returned:", data);
-          // Set ALL rows to "No tide data" ONLY when empty
-          this.setState({
-            high1: "No tide data",
-            highDate1: "",
-            highTime1: "",
-            highHeight1: "",
-            low1: "No tide data",
-            lowDate1: "",
-            lowTime1: "",
-            lowHeight1: "",
-            high2: "No tide data",
-            highDate2: "",
-            highTime2: "",
-            highHeight2: "",
-            low2: "No tide data",
-            lowDate2: "",
-            lowTime2: "",
-            lowHeight2: "",
-          });
-          return;
-        }
+    const data = await response.json();
+    console.log("Raw tide data:", data);
 
-        // Process real data when available
-        const count = Math.min(4, extremes.length);
-        const date = [];
-        const time = [];
-        const height = [];
+    const extremes = data.data || [];
 
-        for (let i = 0; i < count; i++) {
-          const entry = extremes[i];
-          if (!entry) continue;
-
-          const extremeNewDate = new Date(entry.time || entry.datetime);
-          date[i] = extremeNewDate.toLocaleDateString();
-          time[i] = extremeNewDate.toLocaleTimeString();
-          height[i] = Math.round(entry.height * 100) / 100;
-        }
-
-        // Set real data - missing slots stay as previous values or blank
-        this.setState({
-          high1: extremes[0]?.type || "",
-          highDate1: date[0] || "",
-          highTime1: time[0] || "",
-          highHeight1: height[0] || "",
-
-          low1: extremes[1]?.type || "",
-          lowDate1: date[1] || "",
-          lowTime1: time[1] || "",
-          lowHeight1: height[1] || "",
-
-          high2: extremes[2]?.type || "",
-          highDate2: date[2] || "",
-          highTime2: time[2] || "",
-          highHeight2: height[2] || "",
-
-          low2: extremes[3]?.type || "",
-          lowDate2: date[3] || "",
-          lowTime2: time[3] || "",
-          lowHeight2: height[3] || "",
-        });
+    if (!extremes.length) {
+      this.setState({
+        high1: "No tide data",
+        low1: "No tide data",
       });
+      return;
+    }
 
+    const date = [];
+    const time = [];
+    const height = [];
+
+    for (let i = 0; i < Math.min(4, extremes.length); i++) {
+      const entry = extremes[i];
+      const d = new Date(entry.time || entry.datetime);
+
+      date[i] = d.toLocaleDateString();
+      time[i] = d.toLocaleTimeString();
+      height[i] = Math.round(entry.height * 100) / 100;
+    }
+
+    this.setState({
+      high1: extremes[0]?.type || "",
+      highDate1: date[0] || "",
+      highTime1: time[0] || "",
+      highHeight1: height[0] || "",
+      low1: extremes[1]?.type || "",
+      lowDate1: date[1] || "",
+      lowTime1: time[1] || "",
+      lowHeight1: height[1] || "",
+      high2: extremes[2]?.type || "",
+      highDate2: date[2] || "",
+      highTime2: time[2] || "",
+      highHeight2: height[2] || "",
+      low2: extremes[3]?.type || "",
+      lowDate2: date[3] || "",
+      lowTime2: time[3] || "",
+      lowHeight2: height[3] || "",
+    });
+  } catch (err) {
+    console.error("Tide fetch error:", err);
+  }
+};
     // console.log(data);
     // console.log(data.extremes);
     // console.log(data.extremes[0].datetime);
@@ -144,7 +117,6 @@ class App extends React.Component {
     //   console.log(extremeDate);
     //   console.log(extremeTime);
     //   console.log(extremeRoundedHeight);
-  };
 
   loadBeaches = () => {
     fetchBeaches()
@@ -389,7 +361,7 @@ class App extends React.Component {
         <h2 className="title is-4 mt-5">Create New Beach</h2>
         <div className="columns is-centered">
           <div className="column is-one-third">
-            <form className="is-two-thirds" onSubmit={this.handleCreate}>
+            <form onSubmit={this.handleCreate}>
               {Object.keys(this.state.newBeach).map((field) => (
                 <input
                   key={field}
@@ -410,5 +382,4 @@ class App extends React.Component {
     );
   }
 }
-
 export default App;
